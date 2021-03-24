@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const NewTransactionForm = styled.form`
   h2 {
@@ -32,19 +33,6 @@ export const NewTransactionForm = styled.form`
     width:100%
   }
 
-  button:not(.react-modal-close-button) {
-    background-color: var(--background);
-
-    width: 49%;
-    border: 1px solid #D7D7D7;
-    border-radius: 4px;
-    font-weight: 400;
-    color: var(--text-title);
-    height: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
   button[type="submit"] {
     background-color: var(--green);
 
@@ -63,4 +51,47 @@ export const NewTransactionForm = styled.form`
     right: 1rem;
     border: 0;
   }
+`;
+
+export const TransactionTypesContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  margin: 1rem 0;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--background);
+
+    width: 100%;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    font-weight: 400;
+    color: var(--text-title);
+    height: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    transition: border-color 0.2s;
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+
+    span {
+      margin-left: 1rem;
+      font-size: 1rem;
+      color: var(--text-title);
+    }
+
+    &:hover {
+      border-color: ${darken('0.1', '#d7d7d7')};
+    }
+  }
+
 `;
