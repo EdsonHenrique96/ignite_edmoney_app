@@ -1,18 +1,24 @@
 import Modal from 'react-modal';
-import { NewTransactionForm, TransactionTypesContainer } from './styles';
+import { NewTransactionForm, TransactionTypesContainer, TransactionTypeButton } from './styles';
 
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
+import { useState } from 'react';
 
 
 Modal.setAppElement('#root');
+
 interface NewTransactionModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
+type TransactionType = "deposit" | "withdraw";
+
 export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionModalProps) {
+  const [ type, setType ] = useState<TransactionType>("deposit");
+
   return (
     <Modal 
         isOpen={isOpen}
@@ -35,14 +41,24 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
           <input type="text" name="" id="" placeholder="Título" />
           <input type="text" name="" id="" placeholder="Preço" />
           <TransactionTypesContainer>
-            <button type="button">
-              <img src={incomeImg} alt="tipo entrada"/>
+            <TransactionTypeButton
+              type="button"
+              onClick={() => setType('deposit')}
+              isActive={ type === 'deposit' }
+              activeColor="green"
+            >
+              <img src={incomeImg} alt="Entrada"/>
               <span>Entrada</span>
-            </button>
-            <button type="button">
-              <img src={outcomeImg} alt="tipo saída"/>
+            </TransactionTypeButton>
+            <TransactionTypeButton
+              type="button"
+              onClick={() => setType('withdraw')}
+              isActive={ type === 'withdraw' }
+              activeColor="red"
+            >
+              <img src={outcomeImg} alt="Saída"/>
               <span>Saída</span>
-            </button>
+            </TransactionTypeButton>
           </TransactionTypesContainer>
           <input type="text" name="" id="" placeholder="Categoria" />
 
