@@ -5,7 +5,6 @@ import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import { FormEvent, useContext, useState } from 'react';
-import { api } from '../../services/api';
 import { TransactionContext } from '../../contexts/TransactionContext';
 
 
@@ -27,16 +26,26 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
 
   const { createTransaction } = useContext(TransactionContext);
 
-  function handleSubmit(event: FormEvent) {
+  function resetFieldValues() {
+    setTitle('');
+    setAmount(0);
+    setType('deposit');
+    setCategory('');
+  }
+
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       type,
       category
     });
-   
+
+    onRequestClose();
+
+    resetFieldValues();
   }
 
   return (
