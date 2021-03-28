@@ -25,7 +25,7 @@ export function Summary() {
   })
 
   return(
-    <SummaryContainer>
+    <SummaryContainer isNegativeBalance={summary.total < 0}>
       <div>
         <header>
           <p>Entradas</p>

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const SummaryContainer = styled.section`
+interface SummaryContainerProps {
+  isNegativeBalance: boolean;
+}
+export const SummaryContainer = styled.section<SummaryContainerProps>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
@@ -31,7 +34,7 @@ export const SummaryContainer = styled.section`
 
     &.high-light {
       color: var(--shape);
-      background-color: var(--green);
+      background-color: ${(props) => props.isNegativeBalance ? 'var(--red)' : 'var(--green)' };
     }
 
     &:hover {
